@@ -5,4 +5,13 @@ class window.App extends Backbone.Model
     @set 'deck', deck = new Deck()
     @set 'playerHand', deck.dealPlayer()
     @set 'dealerHand', deck.dealDealer()
+#Logic needs to be here
+  #put game rules in here
+  
 
+# events:
+    # playerHand = @get 'playerHand'
+    # playerHand.on('bust' => this@trigger 'playerBust')
+
+    @get('playerHand').on 'bust', =>
+      @trigger 'playerBust'
