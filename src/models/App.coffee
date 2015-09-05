@@ -15,3 +15,15 @@ class window.App extends Backbone.Model
 
     @get('playerHand').on 'bust', =>
       @trigger 'playerBust'
+
+    @get('dealerHand').on 'bust', =>
+      @trigger 'dealerBust'
+
+    @get('playerHand').on 'stand', =>
+      @get('dealerHand').dealerStart()
+
+
+# get playerHand
+  # listen for 'stand'
+  # once we hear stand get dealerhand
+    # call dealerStart method on dealerhand

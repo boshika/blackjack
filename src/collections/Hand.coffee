@@ -5,8 +5,7 @@ class window.Hand extends Backbone.Collection
 
   hit: ->
     @add(@deck.pop()).last()
-    if @minScore() > 21
-      console.log 'bust: you ar busted'
+    if @maxScore() > 21
       @trigger 'bust'
 
   hasAce: -> @reduce (memo, card) ->
@@ -16,10 +15,19 @@ class window.Hand extends Backbone.Collection
   minScore: -> @reduce (score, card) ->
     score + if card.get 'revealed' then card.get 'value' else 0
   , 0
+
+  maxScore: -> 
+    if @scores()[1] <= 21 then @scores()[1]
+    else @scores()[0]
   
   #need a stand to triggr stand
   stand: -> @trigger 'stand'
 
+  dealerStart: -> 
+    @at(0).flip()
+    while @maxScore() < 17 then @hit()
+
+     
   scores: ->
     # The scores are an array of potential scores.
     # Usually, that array contains one element. That is the only score.

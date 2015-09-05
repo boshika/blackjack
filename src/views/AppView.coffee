@@ -13,6 +13,8 @@ class window.AppView extends Backbone.View
     @render()
     @model.on 'playerBust', =>
       @$el.append '<div>You lost</div>'
+    @model.on 'dealerBust', =>
+      @$el.append '<div>Dealer Bust, You Won!!!</div>'
 
 
   render: ->
@@ -20,5 +22,3 @@ class window.AppView extends Backbone.View
     @$el.html @template()
     @$('.player-hand-container').html new HandView(collection: @model.get 'playerHand').el
     @$('.dealer-hand-container').html new HandView(collection: @model.get 'dealerHand').el
-
-
